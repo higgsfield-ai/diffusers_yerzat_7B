@@ -88,8 +88,18 @@ class TransformerTemporalModel(ModelMixin, ConfigMixin):
     ):
         super().__init__()
         
-        num_attention_heads = 16
-        attention_head_dim = 128
+        if in_channels == 320:
+            num_attention_heads = 64
+            attention_head_dim = 8
+            num_layers = 4
+        elif in_channels == 640:
+            num_attention_heads = 128 
+            attention_head_dim = 8
+            num_layers = 4
+        elif in_channels == 1280:
+            num_attention_heads = 128 
+            attention_head_dim = 8
+            num_layers = 8        
         
         self.num_attention_heads = num_attention_heads
         self.attention_head_dim = attention_head_dim
@@ -100,8 +110,6 @@ class TransformerTemporalModel(ModelMixin, ConfigMixin):
         self.norm = torch.nn.GroupNorm(num_groups=norm_num_groups, num_channels=in_channels, eps=1e-6, affine=True)
         self.proj_in = nn.Linear(in_channels, inner_dim)
         
-        num_layers = 4
-
         # 3. Define transformers blocks
         self.transformer_blocks = nn.ModuleList(
             [
