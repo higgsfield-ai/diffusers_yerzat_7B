@@ -88,18 +88,18 @@ class TransformerTemporalModel(ModelMixin, ConfigMixin):
     ):
         super().__init__()
         
-        if in_channels == 320:
-            num_attention_heads = 64
-            attention_head_dim = 8
-            num_layers = 4
-        elif in_channels == 640:
-            num_attention_heads = 128 
-            attention_head_dim = 8
-            num_layers = 4
-        elif in_channels == 1280:
-            num_attention_heads = 128 
-            attention_head_dim = 8
-            num_layers = 8        
+        #if in_channels == 320:
+        #    num_attention_heads = 64
+        #    attention_head_dim = 8
+        #    num_layers = 4
+        #elif in_channels == 640:
+        #    num_attention_heads = 128 
+        #    attention_head_dim = 8
+        #    num_layers = 4
+        #elif in_channels == 1280:
+        #    num_attention_heads = 128 
+        #    attention_head_dim = 8
+        #    num_layers = 8        
         
         self.num_attention_heads = num_attention_heads
         self.attention_head_dim = attention_head_dim
