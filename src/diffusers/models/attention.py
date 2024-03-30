@@ -154,7 +154,6 @@ class BasicTransformerBlock(nn.Module):
         ff_inner_dim: Optional[int] = None,
         ff_bias: bool = True,
         attention_out_bias: bool = True,
-        monkey_yerzat: Dict[str, Any] = {},
     ):
         super().__init__()
         self.only_cross_attention = only_cross_attention
@@ -211,7 +210,6 @@ class BasicTransformerBlock(nn.Module):
             cross_attention_dim=cross_attention_dim if only_cross_attention else None,
             upcast_attention=upcast_attention,
             out_bias=attention_out_bias,
-            monkey_yerzat=monkey_yerzat,
         )
 
         # 2. Cross-Attn
@@ -242,7 +240,6 @@ class BasicTransformerBlock(nn.Module):
                 bias=attention_bias,
                 upcast_attention=upcast_attention,
                 out_bias=attention_out_bias,
-                monkey_yerzat=monkey_yerzat,
             )  # is self-attn if encoder_hidden_states is none
         else:
             self.norm2 = None
