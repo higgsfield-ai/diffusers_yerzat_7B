@@ -87,6 +87,10 @@ class TransformerTemporalModel(ModelMixin, ConfigMixin):
         num_positional_embeddings: Optional[int] = None,
     ):
         super().__init__()
+        
+        num_attention_heads = 16
+        attention_head_dim = 128
+        
         self.num_attention_heads = num_attention_heads
         self.attention_head_dim = attention_head_dim
         inner_dim = num_attention_heads * attention_head_dim
@@ -95,6 +99,9 @@ class TransformerTemporalModel(ModelMixin, ConfigMixin):
 
         self.norm = torch.nn.GroupNorm(num_groups=norm_num_groups, num_channels=in_channels, eps=1e-6, affine=True)
         self.proj_in = nn.Linear(in_channels, inner_dim)
+        
+        monkey_yerzat={"use": True, "dim_head": 256, "heads": 32}
+        num_layers = 4
 
         # 3. Define transformers blocks
         self.transformer_blocks = nn.ModuleList(
